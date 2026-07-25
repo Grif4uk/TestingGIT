@@ -43,6 +43,11 @@ quotes = [
     "Жизнь — это то, что с тобой происходит, пока ты строишь планы."
 ]
 
+@bot.message_handler(content_types=['new_chat_members'])
+def make_some(message):
+    bot.send_message(message.chat.id, 'Новый участник!')
+    bot.approve_chat_join_request(message.chat.id, message.from_user.id)
+
 @bot.message_handler(commands=['quote'])
 def quote_handler(message):
     if message.from_user.id in banned_users:
